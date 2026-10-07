@@ -548,7 +548,9 @@
 </div>
 
 <script>
-  const API = 'http://localhost:8000';
+  // Derive the API host from the address used to open this page,
+  // so it works over localhost and remote network access (ip:port).
+  const API = `${window.location.protocol}//${window.location.hostname}:8000`;
   let machines = [];
   let opts = { status: [], usedFor: [], machineType: [] };
 
