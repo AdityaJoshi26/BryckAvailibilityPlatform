@@ -186,6 +186,42 @@ fi
 
 deactivate || true
 
+# ── 8. ngrok tunnel (exposes backend for Slack slash commands) ────
+NGROK_API="http://127.0.0.1:4040/api/tunnels"
+NGROK_URL=""
+
+get_ngrok_url() {
+  curl -s "$NGROK_API" 2>/dev/null | python3 -c \
+    "import sys, json
+d = json.load(sys.stdin)
+urls = [t['public_url'] for t in d.get('tunnels', []) if t['public_url'].startswith('https')]
+print(urls[0] if urls else '')" 2>/dev/null
+}
+
+if ! command -v ngrok >/dev/null 2>&1; then
+  warn "ngrok not installed — skipping tunnel. Install: https://ngrok.com/download"
+elif pgrep -f "ngrok http" >/dev/null 2>&1; then
+  NGROK_URL="$(get_ngrok_url)"
+  if [ -n "$NGROK_URL" ]; then
+    log "ngrok already running — public URL: $NGROK_URL"
+  else
+    warn "ngrok already running, but no tunnel URL found yet (check $RUN_DIR/ngrok.log)."
+  fi
+else
+  log "Starting ngrok tunnel on :${BACKEND_PORT}..."
+  ( nohup ngrok http "$BACKEND_PORT" --log=stdout > "$RUN_DIR/ngrok.log" 2>&1 & echo $! > "$RUN_DIR/ngrok.pid" )
+  for _ in $(seq 1 20); do
+    NGROK_URL="$(get_ngrok_url)"
+    [ -n "$NGROK_URL" ] && break
+    sleep 0.5
+  done
+  if [ -n "$NGROK_URL" ]; then
+    log "ngrok tunnel ready — public URL: $NGROK_URL"
+  else
+    warn "ngrok started but no tunnel URL detected yet. Check $RUN_DIR/ngrok.log"
+  fi
+fi
+
 # ── Summary ───────────────────────────────────────────────────────
 IP="$(hostname -I 2>/dev/null | awk '{print $1}')"
 echo
@@ -193,7 +229,9 @@ log "All set. Services are running in the background:"
 echo "   Backend  → http://localhost:${BACKEND_PORT}   (docs: /docs)"
 echo "   Frontend → http://localhost:${FRONTEND_PORT}"
 [ -n "${IP:-}" ] && echo "   LAN access → http://${IP}:${FRONTEND_PORT}"
+[ -n "$NGROK_URL" ] && echo "   ngrok     → $NGROK_URL"
 echo
-echo "   Logs:  $RUN_DIR/backend.log , $RUN_DIR/frontend.log"
-echo "   Stop:  kill \$(cat $RUN_DIR/backend.pid $RUN_DIR/frontend.pid)"
+echo "   Logs:  $RUN_DIR/backend.log , $RUN_DIR/frontend.log , $RUN_DIR/ngrok.log"
+echo "   Stop:  kill \$(cat $RUN_DIR/backend.pid $RUN_DIR/frontend.pid $RUN_DIR/ngrok.pid 2>/dev/null)"
 echo
+
