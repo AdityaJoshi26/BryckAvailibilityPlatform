@@ -29,7 +29,6 @@
       font-family: var(--font);
       font-size: 14px;
       min-height: 100vh;
-      overflow: hidden; /* prevent body scroll — table scrolls instead */
     }
 
     /* ── Header ─────────────────────────────────────────────── */
@@ -44,7 +43,6 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 1px 20px rgba(0,0,0,0.4);
     }
     .brand {
       display: flex;
@@ -60,7 +58,6 @@
       border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
       font-size: 15px;
-      box-shadow: 0 0 14px rgba(59,130,246,0.5);
     }
     .header-right { display: flex; align-items: center; gap: 12px; }
 
@@ -72,7 +69,7 @@
       font-family: var(--font);
       font-size: 13px;
       font-weight: 500;
-      transition: opacity .15s, background .15s, box-shadow .15s;
+      transition: opacity .15s, background .15s;
     }
     button:hover { opacity: .85; }
 
@@ -81,11 +78,6 @@
       color: #fff;
       padding: 8px 16px;
       display: flex; align-items: center; gap: 6px;
-      box-shadow: 0 0 12px rgba(59,130,246,0.3);
-    }
-    .btn-primary:hover {
-      box-shadow: 0 0 20px rgba(59,130,246,0.5);
-      opacity: 1;
     }
     .btn-ghost {
       background: transparent;
@@ -100,33 +92,22 @@
       border: 1px solid transparent;
       padding: 4px 8px;
       border-radius: 4px;
-      font-size: 14px;
-      transition: all .15s;
+      font-size: 16px;
     }
-    .btn-danger:hover {
-      background: rgba(239,68,68,.15);
-      border-color: rgba(239,68,68,.3);
-      box-shadow: 0 0 8px rgba(239,68,68,.2);
-      opacity: 1;
-    }
+    .btn-danger:hover { background: rgba(239,68,68,.1); opacity: 1; }
 
     /* ── Stats Bar ───────────────────────────────────────────── */
     .stats {
       display: flex;
       gap: 12px;
-      padding: 16px 32px 0;
+      padding: 20px 32px 0;
     }
     .stat {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 10px 20px;
+      padding: 12px 20px;
       min-width: 100px;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    .stat:hover {
-      border-color: rgba(59,130,246,0.3);
-      box-shadow: 0 0 12px rgba(59,130,246,0.08);
     }
     .stat-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; }
     .stat-value { font-size: 22px; font-weight: 700; }
@@ -137,7 +118,7 @@
 
     /* ── Toolbar ─────────────────────────────────────────────── */
     .toolbar {
-      padding: 12px 32px;
+      padding: 16px 32px;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -157,12 +138,8 @@
       font-size: 13px;
       font-family: var(--font);
       outline: none;
-      transition: border-color .2s, box-shadow .2s;
     }
-    .search-wrap input:focus {
-      border-color: var(--brand);
-      box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
-    }
+    .search-wrap input:focus { border-color: var(--brand); }
     .search-icon {
       position: absolute;
       left: 10px; top: 50%;
@@ -181,65 +158,26 @@
       font-family: var(--font);
       outline: none;
       cursor: pointer;
-      transition: border-color .2s;
     }
     .filter-select:focus { border-color: var(--brand); }
     .filter-select option { background: var(--surface2); }
 
     /* ── Table Wrapper ───────────────────────────────────────── */
     .table-wrap {
+      padding: 0 32px 40px;
       overflow-x: auto;
-      overflow-y: auto;
-      /* fills remaining height: header(56) + stats(~82) + toolbar(~52) + margins */
-      height: calc(100vh - 56px - 82px - 52px - 24px);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin: 0 32px 24px;
-      box-shadow:
-        0 0 0 1px var(--border),
-        0 8px 32px rgba(0,0,0,0.4),
-        inset 0 1px 0 rgba(255,255,255,0.03);
-      background: var(--surface);
-      position: relative;
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 13px;
-      table-layout: fixed;
     }
-
-    /* ── Column Widths ───────────────────────────────────────── */
-    col.c-ip       { width: 170px; }
-    col.c-ibmi     { width: 150px; }
-    col.c-host     { width: 150px; }
-    col.c-type     { width: 105px; }
-    col.c-status   { width: 95px; }
-    col.c-priority { width: 90px; }
-    col.c-usedfor  { width: 95px; }
-    col.c-allotted { width: 115px; }
-    col.c-parallel { width: 75px; }
-    col.c-build    { width: 88px; }
-    col.c-tests    { width: 85px; }
-    col.c-testsuite{ width: 140px; }
-    col.c-health   { width: 120px; }
-    col.c-issues   { width: 90px; }
-    col.c-customer { width: 100px; }
-    col.c-shipdate { width: 120px; }
-    col.c-notes    { width: 160px; }
-    col.c-del      { width: 40px; }
-
     thead tr {
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      border-bottom: 1px solid var(--border);
     }
     th {
-      background: rgba(14, 20, 35, 0.97);
-      backdrop-filter: blur(8px);
       text-align: left;
-      padding: 11px 12px;
+      padding: 10px 12px;
       color: var(--muted);
       font-weight: 600;
       font-size: 11px;
@@ -247,55 +185,33 @@
       letter-spacing: .7px;
       white-space: nowrap;
       user-select: none;
-      border-bottom: 1px solid var(--border);
     }
-
     tbody tr {
-      border-bottom: 1px solid rgba(31,45,69,0.6);
-      transition: background .12s;
+      border-bottom: 1px solid var(--border);
+      transition: background .1s;
     }
-    tbody tr:nth-child(even) {
-      background: rgba(26, 34, 53, 0.35);
-    }
-    tbody tr:hover {
-      background: linear-gradient(90deg, rgba(59,130,246,0.06) 0%, rgba(26,34,53,0.9) 100%);
-    }
+    tbody tr:hover { background: var(--surface2); }
 
     td {
-      padding: 9px 12px;
+      padding: 10px 12px;
       vertical-align: middle;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    /* Notes column wraps */
-    td:nth-child(17) {
-      white-space: normal;
-      word-break: break-word;
+      max-width: 180px;
     }
 
     /* ── Editable Cells ──────────────────────────────────────── */
     .editable {
       outline: none;
-      border-radius: 5px;
+      border-radius: 4px;
       padding: 3px 6px;
-      min-width: 40px;
-      display: block;
+      min-width: 60px;
+      display: inline-block;
       transition: background .15s, box-shadow .15s;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
+      word-break: break-word;
     }
     .editable:hover { background: rgba(59,130,246,.08); cursor: text; }
     .editable:focus {
-      background: rgba(59,130,246,.13);
-      box-shadow: 0 0 0 2px rgba(59,130,246,.35);
-      white-space: normal;
-      overflow: visible;
-      position: relative;
-      z-index: 2;
+      background: rgba(59,130,246,.12);
+      box-shadow: 0 0 0 2px rgba(59,130,246,.4);
     }
     .editable.empty { color: var(--muted); font-style: italic; }
 
@@ -333,13 +249,12 @@
       width: 6px; height: 6px;
       border-radius: 50%;
       background: currentColor;
-      box-shadow: 0 0 5px currentColor;
     }
-    .badge.Active  { color: var(--success); background: rgba(34,197,94,.12);   box-shadow: 0 0 10px rgba(34,197,94,.1); }
-    .badge.Ready   { color: var(--brand);   background: rgba(59,130,246,.12);  box-shadow: 0 0 10px rgba(59,130,246,.1); }
-    .badge.Down    { color: var(--danger);  background: rgba(239,68,68,.12);   box-shadow: 0 0 10px rgba(239,68,68,.1); }
-    .badge.Shipped { color: var(--warn);    background: rgba(245,158,11,.12);  box-shadow: 0 0 10px rgba(245,158,11,.1); }
-    .badge.Idle    { color: var(--muted);   background: rgba(100,116,139,.12); }
+    .badge.Active  { color: var(--success); background: rgba(34,197,94,.1); }
+    .badge.Ready   { color: var(--brand);   background: rgba(59,130,246,.1); }
+    .badge.Down    { color: var(--danger);  background: rgba(239,68,68,.1); }
+    .badge.Shipped { color: var(--warn);    background: rgba(245,158,11,.1); }
+    .badge.Idle    { color: var(--muted);   background: rgba(100,116,139,.1); }
 
     /* Status cell wraps badge + hidden select */
     .status-cell { position: relative; cursor: pointer; }
@@ -350,89 +265,48 @@
       cursor: pointer;
     }
 
-    /* ── Suite Picker ────────────────────────────────────────── */
     .suite-picker {
       position: relative;
-      width: 100%;
+      min-width: 220px;
     }
     .suite-trigger {
       width: 100%;
+      justify-content: space-between;
       color: var(--text);
-      padding: 5px 8px;
+      padding: 6px 10px;
       font-size: 12px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: rgba(59,130,246,0.06);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: block;
-      text-align: left;
     }
-    .suite-trigger:hover {
-      border-color: var(--brand);
-      background: rgba(59,130,246,0.12);
-      opacity: 1;
-    }
-
-    /* Hover reveal source targets */
-    .hover-reveal { cursor: default; }
-    .editable.hover-reveal { cursor: text; }
-    .suite-trigger.hover-reveal { cursor: pointer; }
-
-    /* Floating tooltip (fixed width, dynamic height, capsule corners) */
-    #hover-tooltip {
-      position: fixed;
-      width: 320px;
-      max-width: min(320px, calc(100vw - 24px));
-      max-height: min(65vh, 520px);
-      overflow-y: auto;
-      background: linear-gradient(180deg, #0f1930 0%, #0b1428 100%);
-      color: var(--text);
-      border: 1px solid rgba(59,130,246,0.48);
-      border-radius: 50px;
-      box-shadow: 0 16px 36px rgba(0,0,0,0.55), 0 0 0 1px rgba(59,130,246,0.18);
-      padding: 12px 18px;
-      font-size: 12px;
-      line-height: 1.45;
-      white-space: pre-line;
-      word-break: break-word;
-      pointer-events: none;
-      z-index: 1200;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(8px) scale(.98);
-      transition: opacity .15s ease, transform .15s ease, visibility .15s ease;
-    }
-    #hover-tooltip.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
-    }
-    /* Fixed positioning so it's never clipped by overflow:hidden on td */
     .suite-menu {
       display: none;
-      position: fixed;
-      width: 300px;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 320px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 8px;
-      z-index: 500;
-      box-shadow: 0 12px 36px rgba(0,0,0,0.55), 0 0 0 1px rgba(59,130,246,0.12);
+      z-index: 40;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
     }
     .suite-menu.open { display: block; }
+    .suite-list {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
     .suite-option {
       display: grid;
-      grid-template-columns: minmax(100px, 1fr) auto auto;
+      grid-template-columns: minmax(120px, 1fr) auto auto;
       align-items: center;
       gap: 8px;
-      padding: 7px 6px;
+      padding: 6px 4px;
       border-bottom: 1px solid rgba(31, 45, 69, 0.8);
-      border-radius: 4px;
-      transition: background .1s;
     }
-    .suite-option:hover { background: var(--surface2); }
     .suite-option:last-child { border-bottom: none; }
     .suite-name {
       font-size: 12px;
@@ -460,14 +334,11 @@
       background: var(--border);
       position: relative;
       cursor: pointer;
-      transition: background .2s, box-shadow .2s;
+      transition: background .2s;
       border: none;
       flex-shrink: 0;
     }
-    .toggle.on {
-      background: var(--brand);
-      box-shadow: 0 0 10px rgba(59,130,246,0.5);
-    }
+    .toggle.on { background: var(--brand); }
     .toggle::after {
       content: '';
       position: absolute;
@@ -476,7 +347,6 @@
       background: #fff;
       top: 3px; left: 3px;
       transition: transform .2s;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
     .toggle.on::after { transform: translateX(16px); }
 
@@ -486,16 +356,7 @@
       align-items: center;
       gap: 8px;
     }
-    .ip-text {
-      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-      font-size: 12px;
-      color: var(--brand);
-      background: rgba(59,130,246,0.08);
-      border: 1px solid rgba(59,130,246,0.2);
-      border-radius: 5px;
-      padding: 2px 7px;
-      letter-spacing: 0.3px;
-    }
+    .ip-text { font-family: monospace; font-size: 13px; color: var(--brand); }
 
     /* ── Empty & Loading ─────────────────────────────────────── */
     .empty-row td {
@@ -531,18 +392,17 @@
       max-width: 300px;
     }
     #toast.show { opacity: 1; transform: translateY(0); }
-    #toast.ok   { border-color: var(--success); color: var(--success); box-shadow: 0 0 12px rgba(34,197,94,0.15); }
-    #toast.err  { border-color: var(--danger);  color: var(--danger);  box-shadow: 0 0 12px rgba(239,68,68,0.15); }
+    #toast.ok   { border-color: var(--success); color: var(--success); }
+    #toast.err  { border-color: var(--danger);  color: var(--danger); }
 
     /* ── Modal ───────────────────────────────────────────────── */
     .modal-backdrop {
       display: none;
       position: fixed; inset: 0;
-      background: rgba(0,0,0,.65);
+      background: rgba(0,0,0,.6);
       z-index: 200;
       align-items: center;
       justify-content: center;
-      backdrop-filter: blur(3px);
     }
     .modal-backdrop.open { display: flex; }
     .modal {
@@ -553,7 +413,6 @@
       max-width: 95vw;
       max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(59,130,246,0.1);
     }
     .modal-header {
       padding: 20px 24px 16px;
@@ -594,14 +453,10 @@
       font-size: 13px;
       font-family: var(--font);
       outline: none;
-      transition: border-color .2s, box-shadow .2s;
     }
     .form-group input:focus,
     .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--brand);
-      box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
-    }
+    .form-group textarea:focus { border-color: var(--brand); }
     .form-group select option { background: var(--surface2); }
     .form-group textarea { resize: vertical; min-height: 70px; }
     .modal-footer {
@@ -612,22 +467,10 @@
       gap: 10px;
     }
 
-    /* Suite list in modal */
-    .suite-list {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
     /* ── Scrollbar ───────────────────────────────────────────── */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.2); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(59,130,246,0.4); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
   </style>
 </head>
 <body>
@@ -667,26 +510,6 @@
 <!-- Table -->
 <div class="table-wrap">
   <table>
-    <colgroup>
-      <col class="c-ip">
-      <col class="c-ibmi">
-      <col class="c-host">
-      <col class="c-type">
-      <col class="c-status">
-      <col class="c-priority">
-      <col class="c-usedfor">
-      <col class="c-allotted">
-      <col class="c-parallel">
-      <col class="c-build">
-      <col class="c-tests">
-      <col class="c-testsuite">
-      <col class="c-health">
-      <col class="c-issues">
-      <col class="c-customer">
-      <col class="c-shipdate">
-      <col class="c-notes">
-      <col class="c-del">
-    </colgroup>
     <thead>
       <tr>
         <th>IP Address</th>
@@ -694,7 +517,6 @@
         <th>Hostname</th>
         <th>Type</th>
         <th>Status</th>
-        <th>Priority</th>
         <th>Used For</th>
         <th>Allotted To</th>
         <th>Parallel</th>
@@ -706,8 +528,7 @@
         <th>Customer</th>
         <th>Ship Date</th>
         <th>Notes</th>
-        <th>Delete</th>
-        <!-- <th></th> -->
+        <th></th>
       </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -747,10 +568,6 @@
           <select id="f-mstatus"></select>
         </div>
         <div class="form-group">
-          <label>Priority</label>
-          <select id="f-priority"></select>
-        </div>
-        <div class="form-group">
           <label>Used For</label>
           <select id="f-usedfor"></select>
         </div>
@@ -760,7 +577,7 @@
         </div>
         <div class="form-group">
           <label>Current Build</label>
-          <input id="f-build" placeholder="0.0.0.0" />
+          <input id="f-build" placeholder="v2.1.4" />
         </div>
         <div class="form-group">
           <label>Tests Completed</label>
@@ -768,7 +585,7 @@
         </div>
         <div class="form-group">
           <label>Customer</label>
-          <input id="f-customer" placeholder="AWS" />
+          <input id="f-customer" placeholder="Acme Corp" />
         </div>
         <div class="form-group">
           <label>Shipping Date</label>
@@ -803,44 +620,28 @@
 </div>
 
 <script>
-  // Derive the API host from the address used to open this page,
-  // so it works over localhost and remote network access (ip:port).
-  const API = `${window.location.protocol}//${window.location.hostname}:8000`;
-  const DEFAULT_PRIORITY_OPTIONS = [
-    { label: "High", value: 0 },
-    { label: "Medium", value: 1 },
-    { label: "Low", value: 2 },
-  ];
-  const LIVE_SYNC_INTERVAL_MS = 4000;
-  const HOVER_TOOLTIP_WIDTH = 320;
+  const API = "http://localhost:8000";
   let machines = [];
-  let opts = { status: [], usedFor: [], machineType: [], testSuites: [], priority: DEFAULT_PRIORITY_OPTIONS };
-  let liveSyncTimer = null;
-  let lastInventoryFingerprint = "";
-  let hoverTooltipEl = null;
-  let hoverTargetEl = null;
+  let opts = { status: [], usedFor: [], machineType: [], testSuites: [] };
 
   async function boot() {
     try {
-      const [status, usedFor, machineType, testSuites, priority] = await Promise.all([
+      const [status, usedFor, machineType, testSuites] = await Promise.all([
         fetch(`${API}/inventory/options/status`).then(r => r.json()),
         fetch(`${API}/inventory/options/used-for`).then(r => r.json()),
         fetch(`${API}/inventory/options/machine-type`).then(r => r.json()),
         fetch(`${API}/inventory/options/test-suites`).then(r => r.json()),
-        fetch(`${API}/inventory/options/priority`).then(r => r.json()),
       ]);
 
       opts.status = status;
       opts.usedFor = usedFor;
       opts.machineType = machineType;
       opts.testSuites = testSuites;
-      opts.priority = normalizePriorityOptions(priority);
 
       populateFilters();
       populateModalSelects();
       renderModalTestSuites();
       await loadMachines();
-      startAutoSync();
     } catch {
       toast("Failed to load startup data", "err");
     }
@@ -865,45 +666,15 @@
     });
   }
 
-  function normalizePriorityOptions(rawOptions) {
-    if (!Array.isArray(rawOptions)) {
-      return DEFAULT_PRIORITY_OPTIONS;
-    }
-
-    const normalized = rawOptions
-      .map(item => {
-        if (typeof item !== "object" || item === null) return null;
-        const value = Number(item.value);
-        const label = String(item.label || "").trim();
-        if (!Number.isInteger(value) || !label || value < 0 || value > 2) return null;
-        return { value, label };
-      })
-      .filter(Boolean)
-      .sort((a, b) => a.value - b.value);
-
-    return normalized.length ? normalized : DEFAULT_PRIORITY_OPTIONS;
-  }
-
-  function normalizePriorityValue(value) {
-    const parsed = Number(value);
-    if (parsed === 0 || parsed === 1 || parsed === 2) return parsed;
-    return 2;
-  }
-
   function populateModalSelects() {
     const blank = '<option value="">- select -</option>';
-    ["f-mtype", "f-mstatus", "f-usedfor", "f-priority"].forEach(id => {
+    ["f-mtype", "f-mstatus", "f-usedfor"].forEach(id => {
       document.getElementById(id).innerHTML = blank;
     });
 
     opts.machineType.forEach(v => document.getElementById("f-mtype").add(new Option(v, v)));
     opts.status.forEach(v => document.getElementById("f-mstatus").add(new Option(v, v)));
     opts.usedFor.forEach(v => document.getElementById("f-usedfor").add(new Option(v, v)));
-    document.getElementById("f-priority").innerHTML = "";
-    opts.priority.forEach(({ label, value }) => {
-      document.getElementById("f-priority").add(new Option(label, String(value)));
-    });
-    document.getElementById("f-priority").value = "2";
   }
 
   function renderModalTestSuites() {
@@ -923,7 +694,7 @@
           include
         </label>
         <label class="suite-flag">
-          <input type="checkbox" data-role="done" data-suite="${suite}" disabled />      
+          <input type="checkbox" data-role="done" data-suite="${suite}" checked />
           complete
         </label>
       </div>
@@ -978,21 +749,12 @@
     return `${done}/${suites.length} complete`;
   }
 
-  function getTestStatusHoverText(value) {
-    const status = normalizeTestStatus(value);
-    const suites = Object.keys(status);
-    if (!suites.length) return "No tests selected";
-    return suites
-      .map(suite => `${suite}: ${status[suite] ? "Complete" : "Pending"}`)
-      .join("\n");
-  }
-
   function renderSuiteMenu(machine) {
     const status = normalizeTestStatus(machine.test_status);
 
     return `
       <div class="suite-picker">
-        <button class="btn-ghost suite-trigger hover-reveal" data-machine-id="${machine.id}" onclick="toggleSuiteMenu(event, ${machine.id})">
+        <button class="btn-ghost suite-trigger" onclick="toggleSuiteMenu(event, ${machine.id})" style="width: 100px;">
           ${getTestStatusSummary(status)}
         </button>
         <div class="suite-menu" id="suite-menu-${machine.id}" onclick="event.stopPropagation()">
@@ -1048,15 +810,7 @@
 
     const shouldOpen = !menu.classList.contains("open");
     closeAllSuiteMenus(machineId);
-
-    if (shouldOpen) {
-      // Anchor the fixed dropdown under the trigger button
-      const btn = event.currentTarget;
-      const rect = btn.getBoundingClientRect();
-      menu.style.top  = (rect.bottom + 6) + "px";
-      menu.style.left = rect.left + "px";
-      menu.classList.add("open");
-    }
+    menu.classList.toggle("open", shouldOpen);
   }
 
   async function onSuiteToggle(input) {
@@ -1096,167 +850,14 @@
     await patch(machineId, { test_status: payload }, { rerenderTable: true, quiet: true });
   }
 
-  function inventoryFingerprint(list) {
-    return list
-      .map(m => JSON.stringify(m))
-      .sort()
-      .join("|");
-  }
+  async function loadMachines() {
+    document.getElementById("tbody").innerHTML =
+      `<tr class="empty-row"><td colspan="17"><span class="spinner"></span></td></tr>`;
 
-  function isEditingNow() {
-    const active = document.activeElement;
-    if (!active) return false;
-    return active.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(active.tagName);
-  }
-
-  function refreshHoverText() {
-    document.querySelectorAll(".editable.hover-reveal").forEach(el => {
-      el.dataset.hoverText = (el.innerText || "").trim();
-    });
-
-    document.querySelectorAll(".suite-trigger.hover-reveal").forEach(btn => {
-      const machineId = Number(btn.dataset.machineId);
-      const machine = machines.find(m => m.id === machineId);
-      btn.dataset.hoverText = machine ? getTestStatusHoverText(machine.test_status) : "";
-    });
-  }
-
-  function ensureHoverTooltip() {
-    if (hoverTooltipEl) return hoverTooltipEl;
-
-    hoverTooltipEl = document.createElement("div");
-    hoverTooltipEl.id = "hover-tooltip";
-    hoverTooltipEl.setAttribute("role", "tooltip");
-    document.body.appendChild(hoverTooltipEl);
-    return hoverTooltipEl;
-  }
-
-  function positionHoverTooltip(target = hoverTargetEl) {
-    if (!target) return;
-    const tooltip = ensureHoverTooltip();
-    if (!tooltip.classList.contains("show")) return;
-
-    const pad = 12;
-    const rect = target.getBoundingClientRect();
-    const tooltipWidth = Math.min(HOVER_TOOLTIP_WIDTH, window.innerWidth - (pad * 2));
-    tooltip.style.width = `${tooltipWidth}px`;
-
-    const height = tooltip.offsetHeight || 0;
-    let left = rect.left + (rect.width / 2) - (tooltipWidth / 2);
-    left = Math.max(pad, Math.min(left, window.innerWidth - tooltipWidth - pad));
-
-    let top = rect.top - height - 10;
-    if (top < pad) {
-      top = Math.min(window.innerHeight - height - pad, rect.bottom + 10);
-    }
-
-    tooltip.style.left = `${left}px`;
-    tooltip.style.top = `${top}px`;
-  }
-
-  function showHoverTooltip(target) {
-    if (!target) return;
-    if (target.isContentEditable && target === document.activeElement) return;
-
-    const text = (target.dataset.hoverText || "").trim();
-    if (!text) return;
-
-    const tooltip = ensureHoverTooltip();
-    hoverTargetEl = target;
-    tooltip.textContent = text;
-    tooltip.classList.add("show");
-    positionHoverTooltip(target);
-  }
-
-  function hideHoverTooltip() {
-    if (!hoverTooltipEl) return;
-    hoverTargetEl = null;
-    hoverTooltipEl.classList.remove("show");
-  }
-
-  function initHoverTooltip() {
-    ensureHoverTooltip();
-
-    document.addEventListener("mouseover", e => {
-      const target = e.target.closest(".hover-reveal");
-      if (!target) return;
-      showHoverTooltip(target);
-    });
-
-    document.addEventListener("mouseout", e => {
-      const from = e.target.closest(".hover-reveal");
-      if (!from) return;
-
-      const to = e.relatedTarget && e.relatedTarget.closest
-        ? e.relatedTarget.closest(".hover-reveal")
-        : null;
-
-      if (from === to) return;
-      if (hoverTargetEl === from) {
-        hideHoverTooltip();
-      }
-    });
-
-    document.addEventListener("focusin", e => {
-      const target = e.target.closest(".hover-reveal");
-      if (!target) return;
-      showHoverTooltip(target);
-    });
-
-    document.addEventListener("focusout", e => {
-      const target = e.target.closest(".hover-reveal");
-      if (!target) return;
-      if (hoverTargetEl === target) {
-        hideHoverTooltip();
-      }
-    });
-
-    window.addEventListener("scroll", () => positionHoverTooltip(), true);
-    window.addEventListener("resize", () => positionHoverTooltip());
-  }
-
-  async function loadMachines(options = {}) {
-    const showLoading = options.showLoading !== false;
-    const silentError = options.silentError === true;
-
-    if (showLoading) {
-      document.getElementById("tbody").innerHTML =
-        `<tr class="empty-row"><td colspan="18"><span class="spinner"></span></td></tr>`;
-    }
-
-    try {
-      const res = await fetch(`${API}/inventory`);
-      if (!res.ok) {
-        throw new Error(await readErrorMessage(res));
-      }
-
-      const nextMachines = await res.json();
-      const nextFingerprint = inventoryFingerprint(nextMachines);
-      const changed = nextFingerprint !== lastInventoryFingerprint;
-
-      machines = nextMachines;
-      lastInventoryFingerprint = nextFingerprint;
-
-      if (showLoading || changed) {
-        renderTable();
-        renderStats();
-      }
-    } catch (err) {
-      if (!silentError) {
-        toast(err.message || "Failed to load inventory", "err");
-      }
-    }
-  }
-
-  function startAutoSync() {
-    if (liveSyncTimer) {
-      clearInterval(liveSyncTimer);
-    }
-
-    liveSyncTimer = setInterval(async () => {
-      if (document.hidden || isEditingNow()) return;
-      await loadMachines({ showLoading: false, silentError: true });
-    }, LIVE_SYNC_INTERVAL_MS);
+    const res = await fetch(`${API}/inventory`);
+    machines = await res.json();
+    renderTable();
+    renderStats();
   }
 
   function renderStats() {
@@ -1270,11 +871,11 @@
       `${counts.total} machine${counts.total !== 1 ? "s" : ""}`;
 
     document.getElementById("stats").innerHTML = [
-      ["Total",   counts.total,        "total"],
-      ["Active",  counts.Active  || 0, "active"],
-      ["Down",    counts.Down    || 0, "down"],
+      ["Total", counts.total, "total"],
+      ["Active", counts.Active || 0, "active"],
+      ["Down", counts.Down || 0, "down"],
       ["Shipped", counts.Shipped || 0, "shipped"],
-      ["Idle",    counts.Idle    || 0, "total"],
+      ["Idle", counts.Idle || 0, "total"],
     ].map(([label, val, cls]) => `
       <div class="stat">
         <div class="stat-label">${label}</div>
@@ -1295,12 +896,10 @@
       if (fUs && m.used_for !== fUs) return false;
       if (q) {
         const suiteText = Object.keys(normalizeTestStatus(m.test_status)).join(" ");
-        const priorityText = (opts.priority.find(p => p.value === normalizePriorityValue(m.priority)) || {}).label || "";
         const hay = [
           m.ip_address,
           m.ibmi_bmc,
           m.hostname,
-          priorityText,
           m.allotted_to,
           m.customer,
           m.notes,
@@ -1311,17 +910,10 @@
       }
       return true;
     });
-    rows.sort((a, b) => {
-      const priorityDiff = normalizePriorityValue(a.priority) - normalizePriorityValue(b.priority);
-      if (priorityDiff !== 0) return priorityDiff;
-      const timeA = Date.parse(a.created_at || 0) || 0;
-      const timeB = Date.parse(b.created_at || 0) || 0;
-      return timeB - timeA;
-    });
 
     const tbody = document.getElementById("tbody");
     if (!rows.length) {
-      tbody.innerHTML = `<tr class="empty-row"><td colspan="18">No machines found</td></tr>`;
+      tbody.innerHTML = `<tr class="empty-row"><td colspan="17">No machines found</td></tr>`;
       return;
     }
 
@@ -1354,14 +946,6 @@
             onchange="saveStatusSelect(this)">
             ${opts.status.map(v =>
               `<option value="${v}" ${m.status === v ? "selected" : ""}>${v}</option>`
-            ).join("")}
-          </select>
-        </td>
-        <td>
-          <select class="cell-select" data-field="priority" data-id="${m.id}"
-            onchange="savePrioritySelect(this)">
-            ${opts.priority.map(p =>
-              `<option value="${p.value}" ${normalizePriorityValue(m.priority) === p.value ? "selected" : ""}>${p.label}</option>`
             ).join("")}
           </select>
         </td>
@@ -1407,19 +991,16 @@
           data-field="shipping_date" data-id="${m.id}"
           onblur="saveCell(this)" onkeydown="cellKey(event,this)"
           >${m.shipping_date || ""}</span></td>
-        <td><span class="editable" contenteditable="true"
+        <td style="max-width:220px"><span class="editable" contenteditable="true"
           data-field="notes" data-id="${m.id}"
           onblur="saveCell(this)" onkeydown="cellKey(event,this)"
           style="white-space:pre-wrap"
           >${m.notes || ""}</span></td>
         <td>
-          <button class="btn-danger" style="display:block;margin:auto"  onclick="deleteMachine(${m.id})" title="Remove">✕</button>
+          <button class="btn-danger" onclick="deleteMachine(${m.id})" title="Remove">x</button>
         </td>
       </tr>
     `).join("");
-
-    tbody.querySelectorAll(".editable").forEach(el => el.classList.add("hover-reveal"));
-    refreshHoverText();
   }
 
   function cellKey(e, el) {
@@ -1436,20 +1017,11 @@
     const id = el.dataset.id;
     const field = el.dataset.field;
     const value = el.innerText.trim();
-    el.dataset.hoverText = value;
     await patch(id, { [field]: value || null });
   }
 
   async function saveSelect(el) {
     await patch(el.dataset.id, { [el.dataset.field]: el.value });
-  }
-
-  async function savePrioritySelect(el) {
-    await patch(
-      el.dataset.id,
-      { priority: normalizePriorityValue(el.value) },
-      { rerenderTable: true }
-    );
   }
 
   async function saveStatusSelect(el) {
@@ -1492,12 +1064,10 @@
 
       const updated = await res.json();
       machines = machines.map(m => (m.id == id ? updated : m));
-      lastInventoryFingerprint = inventoryFingerprint(machines);
       if (options.rerenderTable) {
         renderTable();
       }
       renderStats();
-      refreshHoverText();
       if (!options.quiet) {
         toast("Saved", "ok");
       }
@@ -1512,7 +1082,6 @@
     const res = await fetch(`${API}/inventory/${id}`, { method: "DELETE" });
     if (res.ok || res.status === 204) {
       machines = machines.filter(m => m.id !== id);
-      lastInventoryFingerprint = inventoryFingerprint(machines);
       renderTable();
       renderStats();
       toast("Machine removed", "ok");
@@ -1542,7 +1111,6 @@
       hostname: v("f-hostname"),
       machine_type: v("f-mtype"),
       status: v("f-mstatus") || "Ready",
-      priority: normalizePriorityValue(document.getElementById("f-priority").value),
       used_for: v("f-usedfor"),
       allotted_to: v("f-allotted"),
       current_build: v("f-build"),
@@ -1564,7 +1132,6 @@
     if (res.status === 201) {
       const machine = await res.json();
       machines.unshift(machine);
-      lastInventoryFingerprint = inventoryFingerprint(machines);
       renderTable();
       renderStats();
       closeModal();
@@ -1586,7 +1153,6 @@
       "f-ip",
       "f-ibmi-bmc",
       "f-hostname",
-      "f-priority",
       "f-allotted",
       "f-build",
       "f-tests",
@@ -1598,8 +1164,6 @@
       const el = document.getElementById(id);
       if (el) el.value = "";
     });
-    const prioritySelect = document.getElementById("f-priority");
-    if (prioritySelect) prioritySelect.value = "2";
 
     resetModalTestSuites();
   }
@@ -1643,14 +1207,8 @@
     }
   });
 
-  document.addEventListener("visibilitychange", () => {
-    if (!document.hidden && !isEditingNow()) {
-      loadMachines({ showLoading: false, silentError: true });
-    }
-  });
-
-  initHoverTooltip();
   boot();
 </script>
 </body>
 </html>
+

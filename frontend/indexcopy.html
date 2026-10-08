@@ -803,9 +803,7 @@
 </div>
 
 <script>
-  // Derive the API host from the address used to open this page,
-  // so it works over localhost and remote network access (ip:port).
-  const API = `${window.location.protocol}//${window.location.hostname}:8000`;
+  const API = "http://192.168.6.165:8000";
   const DEFAULT_PRIORITY_OPTIONS = [
     { label: "High", value: 0 },
     { label: "Medium", value: 1 },
