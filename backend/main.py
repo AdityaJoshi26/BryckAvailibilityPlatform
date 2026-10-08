@@ -155,29 +155,23 @@ def slack_inventory(
     db: Session = Depends(get_db),
 ):
     machines = db.query(Machine).order_by(Machine.created_at.desc()).all()
-    priority_label = {p["value"]: p["label"] for p in PRIORITY_OPTIONS}
 
     headers = [
-        "IP", "Host", "Type", "Status",
-        "Priority", "Used For", "Allotted To",
-        "Customer", "Ship Date"
+        "IP", "BMC", "Parallel", "Allotted To",
+        "Status", "Type", "Build"
     ]
 
     rows = []
 
     for m in machines:
-        ship_date = m.shipping_date.isoformat() if m.shipping_date else "NA"
-
         rows.append([
             str(m.ip_address or "NA"),
-            str(m.hostname or "NA"),
-            str(m.machine_type or "NA"),
-            str(m.status or "NA"),
-            str(priority_label.get(m.priority, m.priority) or "NA"),
-            str(m.used_for or "NA"),
+            str(m.ibmi_bmc or "NA"),
+            "Yes" if m.can_parallel else "No",
             str(m.allotted_to or "NA"),
-            str(m.customer or "NA"),
-            ship_date,
+            str(m.status or "NA"),
+            str(m.machine_type or "NA"),
+            str(m.current_build or "NA"),
         ])
 
     if rows:
