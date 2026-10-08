@@ -165,24 +165,34 @@ else
   fi
 fi
 
-# ── 6. Start backend ──────────────────────────────────────────────
-if curl -s "http://localhost:${BACKEND_PORT}/docs" >/dev/null 2>&1; then
-  warn "Backend already responding on :${BACKEND_PORT}, not starting a second one."
-else
-  log "Starting backend on :${BACKEND_PORT}..."
-  ( cd "$BACKEND_DIR" && nohup "$VENV_DIR/bin/uvicorn" main:app \
-      --host 0.0.0.0 --port "$BACKEND_PORT" \
-      > "$RUN_DIR/backend.log" 2>&1 & echo $! > "$RUN_DIR/backend.pid" )
+# ── 6. Start backend (restart to pick up latest code) ─────────────
+if [ -f "$RUN_DIR/backend.pid" ] && kill -0 "$(cat "$RUN_DIR/backend.pid")" 2>/dev/null; then
+  log "Stopping existing backend (pid $(cat "$RUN_DIR/backend.pid"))..."
+  kill "$(cat "$RUN_DIR/backend.pid")" 2>/dev/null || true
+  sleep 1
+elif pids="$(lsof -ti tcp:"${BACKEND_PORT}" 2>/dev/null)" && [ -n "$pids" ]; then
+  log "Stopping process already bound to :${BACKEND_PORT}..."
+  kill $pids 2>/dev/null || true
+  sleep 1
 fi
+log "Starting backend on :${BACKEND_PORT}..."
+( cd "$BACKEND_DIR" && nohup "$VENV_DIR/bin/uvicorn" main:app \
+    --host 0.0.0.0 --port "$BACKEND_PORT" \
+    > "$RUN_DIR/backend.log" 2>&1 & echo $! > "$RUN_DIR/backend.pid" )
 
-# ── 7. Start frontend (static server) ─────────────────────────────
-if curl -s "http://localhost:${FRONTEND_PORT}" >/dev/null 2>&1; then
-  warn "Frontend already responding on :${FRONTEND_PORT}, not starting a second one."
-else
-  log "Starting frontend on :${FRONTEND_PORT}..."
-  ( cd "$FRONTEND_DIR" && nohup python3 -m http.server "$FRONTEND_PORT" \
-      > "$RUN_DIR/frontend.log" 2>&1 & echo $! > "$RUN_DIR/frontend.pid" )
+# ── 7. Start frontend (restart to pick up latest code) ─────────────
+if [ -f "$RUN_DIR/frontend.pid" ] && kill -0 "$(cat "$RUN_DIR/frontend.pid")" 2>/dev/null; then
+  log "Stopping existing frontend (pid $(cat "$RUN_DIR/frontend.pid"))..."
+  kill "$(cat "$RUN_DIR/frontend.pid")" 2>/dev/null || true
+  sleep 1
+elif pids="$(lsof -ti tcp:"${FRONTEND_PORT}" 2>/dev/null)" && [ -n "$pids" ]; then
+  log "Stopping process already bound to :${FRONTEND_PORT}..."
+  kill $pids 2>/dev/null || true
+  sleep 1
 fi
+log "Starting frontend on :${FRONTEND_PORT}..."
+( cd "$FRONTEND_DIR" && nohup python3 -m http.server "$FRONTEND_PORT" \
+    > "$RUN_DIR/frontend.log" 2>&1 & echo $! > "$RUN_DIR/frontend.pid" )
 
 deactivate || true
 
