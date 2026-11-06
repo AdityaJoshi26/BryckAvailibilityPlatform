@@ -1,0 +1,198 @@
+{
+  "machines": [
+    {
+      "ip_address": "192.168.6.32",
+      "ibmi_bmc": "192.168.1.32",
+      "hostname": "bryckmini",
+      "used_for": "Test",
+      "notes": "US. OS: Ubuntu 22.04. Bryckmini test system. Flagged for OS re-install (malware); required OS Ubuntu 22.04."
+    },
+    {
+      "ip_address": "192.168.6.35",
+      "ibmi_bmc": "192.168.1.35",
+      "hostname": "bryckmini",
+      "used_for": "Dev",
+      "notes": "US. OS: Ubuntu 22.04. Bryckmini test system. Flagged for OS re-install (malware); required OS Ubuntu 22.04."
+    },
+    {
+      "ip_address": "192.168.6.36",
+      "ibmi_bmc": "192.168.1.36",
+      "hostname": "bryckmini",
+      "used_for": "Test",
+      "notes": "US. OS: Ubuntu 22.04. Bryckmini test system. Flagged for OS re-install (malware); required OS Ubuntu 22.04."
+    },
+    {
+      "ip_address": "192.168.6.57",
+      "hostname": "AI-US-DS-2",
+      "used_for": "Test",
+      "notes": "US. OS: OCL 10. Automation Initiator. Re-install (malware): existing Rocky Linux 8.8 -> OCL 10; Automation Initiator / Storage Server; proposed hostname ai-us-ds-2."
+    },
+    {
+      "ip_address": "192.168.6.38",
+      "hostname": "JK-US-Agent-1",
+      "used_for": "Test",
+      "notes": "US. OS: Ubuntu 24.04. Jenkins Agent. Re-install (malware): existing Ubuntu 20.04 -> Ubuntu 24.04; Jenkins Master/Controller; proposed hostname jk-us-ctrl. Jenkins jobs to back up from http://192.168.6.38:8080 (cloud_transfer_test, continuous_test2, continuous_test2_ORDER_RANGE, TS-Zenith-IN-CQA-1, TS-Zenith-IN-CQA-1-ORDER-RANGE)."
+    },
+    {
+      "ip_address": "192.168.6.29",
+      "hostname": "PXE-US",
+      "used_for": "Test",
+      "notes": "US. OS: Ubuntu 24.04. US PXE Server. Re-install (malware): existing OCL 7.9 -> Ubuntu 24.04; Jenkins Slave/Agent; proposed hostname jk-us-agent-1."
+    },
+    {
+      "ip_address": "192.168.6.193",
+      "ibmi_bmc": "192.168.1.193",
+      "hostname": "bryckminiDev",
+      "used_for": "Dev",
+      "notes": "US. OS: Ubuntu 22.04. Dev Build System."
+    },
+    {
+      "ip_address": "192.168.6.103",
+      "hostname": "bryckserver103",
+      "used_for": "Dev/Test",
+      "notes": "US. OS: Ubuntu 22.04. Minio cluster."
+    },
+    {
+      "ip_address": "192.168.6.209",
+      "ibmi_bmc": "192.168.6.219",
+      "hostname": "bryck-PowerEdge-XR7620",
+      "used_for": "Test",
+      "notes": "US. OS: Ubuntu 22.04. Block Qualification Server."
+    },
+    {
+      "ip_address": "192.168.6.126",
+      "ibmi_bmc": "192.168.1.133",
+      "hostname": "bryckmini",
+      "used_for": "Test",
+      "notes": "US. OS: Ubuntu 22.04. Bryckmini test system."
+    },
+    {
+      "ip_address": "192.168.6.53",
+      "used_for": "Test",
+      "notes": "US. OS: OCL 10. Requires OS re-install. Re-install (malware): existing OCL 7.9 -> OCL 10; Automation Initiator / Storage Server; proposed hostname ai-us-ds-1."
+    },
+    {
+      "ip_address": "192.168.6.204",
+      "ibmi_bmc": "192.168.6.130",
+      "hostname": "FXR",
+      "used_for": "Test",
+      "notes": "US. OS: Ubuntu 22.04."
+    },
+    {
+      "ip_address": "192.168.6.154",
+      "ibmi_bmc": "192.168.6.165",
+      "hostname": "FXR",
+      "used_for": "Test",
+      "notes": "US. OS: Ubuntu 22.04."
+    },
+    {
+      "ip_address": "192.168.6.28",
+      "hostname": "u2204build-virtual-machine",
+      "used_for": "Dev",
+      "notes": "US. OS: Ubuntu 22.04. VM."
+    },
+    {
+      "ip_address": "192.168.6.61",
+      "ibmi_bmc": "192.168.1.61",
+      "hostname": "mini",
+      "notes": "US. OS: Ubuntu 22.04."
+    },
+    {
+      "ip_address": "192.168.6.62",
+      "ibmi_bmc": "192.168.1.62",
+      "hostname": "mini",
+      "notes": "US. OS: Ubuntu 22.04."
+    },
+    {
+      "ip_address": "192.168.6.63",
+      "ibmi_bmc": "192.168.1.63",
+      "hostname": "mini",
+      "notes": "US. OS: Ubuntu 22.04."
+    },
+    {
+      "ip_address": "192.168.6.43",
+      "ibmi_bmc": "192.168.1.43",
+      "hostname": "mini",
+      "notes": "US. OS: Ubuntu 22.04."
+    },
+    {
+      "ip_address": "192.168.6.70",
+      "ibmi_bmc": "169.254.89.19",
+      "notes": "US."
+    },
+    {
+      "ip_address": "192.168.0.210",
+      "hostname": "pve",
+      "used_for": "Test",
+      "notes": "India. OS: Proxmox. Has Jenkins Controller VM."
+    },
+    {
+      "ip_address": "192.168.0.193",
+      "hostname": "JK-IND-CTRL",
+      "used_for": "Test",
+      "notes": "India. OS: Ubuntu 24.04. VM running on Proxmox."
+    },
+    {
+      "ip_address": "192.168.0.177",
+      "hostname": "AI-IND-DS-1",
+      "used_for": "Test",
+      "notes": "India. OS: OCL 9. Automation Initiator. Re-install (malware): existing OCL 7.9 -> OCL 10; Automation Initiator; proposed hostname ai-ind-ds-1."
+    },
+    {
+      "ip_address": "192.168.0.172",
+      "hostname": "DS-IND-PXE-1",
+      "used_for": "Test",
+      "notes": "India. OS: Ubuntu 24.04. Dataserver and PXE server."
+    },
+    {
+      "ip_address": "192.168.0.176",
+      "ibmi_bmc": "192.168.0.167",
+      "used_for": "Dev",
+      "notes": "India. OS: OCL 10. Used for certification."
+    },
+    {
+      "ip_address": "192.168.0.182",
+      "hostname": "JK-IND-Agent-1",
+      "used_for": "Test",
+      "notes": "India. OS: Ubuntu 24.04. Jenkins Agent India."
+    },
+    {
+      "ip_address": "192.168.0.76",
+      "ibmi_bmc": "192.168.0.184",
+      "hostname": "brontostore01",
+      "used_for": "Test",
+      "notes": "India. OS: Ubuntu 22.04. Brontostor testing single node."
+    },
+    {
+      "ip_address": "192.168.0.181",
+      "ibmi_bmc": "192.168.0.178",
+      "hostname": "bryck-fxr",
+      "used_for": "Test",
+      "notes": "India. OS: Ubuntu 22.04. Test system, has block drive issues."
+    },
+    {
+      "ip_address": "192.168.0.221",
+      "ibmi_bmc": "192.168.0.21",
+      "hostname": "bryck",
+      "used_for": "Test",
+      "notes": "India. OS: OCL 10. Automation runs."
+    },
+    {
+      "ip_address": "192.168.0.231",
+      "ibmi_bmc": "192.168.0.22",
+      "hostname": "bryck",
+      "used_for": "Dev",
+      "notes": "India. OS: OCL 10. Requires OS re-install."
+    },
+    {
+      "ip_address": "192.168.0.68",
+      "used_for": "Test",
+      "notes": "India. Re-install (malware): existing Ubuntu 22.04 -> Ubuntu 24.04; Jenkins Slave/Agent; proposed hostname jk-ind-agent-1."
+    },
+    {
+      "ip_address": "192.168.0.71",
+      "used_for": "Test",
+      "notes": "India. Re-install (malware): existing Ubuntu 22.04 -> Ubuntu 24.04; PXE, Storage server; proposed hostname ds-pxe-ind-1."
+    }
+  ]
+}
